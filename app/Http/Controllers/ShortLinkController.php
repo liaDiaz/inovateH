@@ -24,6 +24,11 @@ class ShortLinkController extends Controller
     }
     public function show($code)
     {
-        dd($code);
+        $short_url = ShortLink::Where('short_url',$code)->first();
+
+        if ($short_url) {
+            return redirect()->to(url($short_url->url));
+        }
+        return redirect()->to(url('/'));
     }
 }
