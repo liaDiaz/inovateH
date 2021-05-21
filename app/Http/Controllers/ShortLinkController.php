@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ShortRequest;
+use Illuminate\Http\Request;
 use App\Models\ShortLink;
 
 class ShortLinkController extends Controller
 {
-    public function createShortLink(ShortRequest $request){
+    public function createShortLink(Request $request){
         if($request->url){
             $new_url = ShortLink::Create([
                 'url'=> $request->url
@@ -17,7 +17,7 @@ class ShortLinkController extends Controller
                 $new_url->update([
                     'short_url' => $short_url
                 ]);
-                    return redirect()->back()->with('success_message',' la Url acortada es: <a href="' .url($short_url) .'">'. url($short_url) . '</a>');
+                    return redirect()->back()->with('success_message',' Url acortada : <a href="' .url($short_url) .'" target="_blank" class="mt-3 mb-3"> <br>' . url($short_url) . '</a>');
             }
         }
         return back();
